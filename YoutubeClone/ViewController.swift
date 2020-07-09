@@ -9,14 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let i = 0
-        print(i)
+        YoutubeClient.getVideos()
     }
-
-
 }
 
