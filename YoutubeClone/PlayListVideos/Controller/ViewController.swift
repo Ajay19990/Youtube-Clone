@@ -21,7 +21,28 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        YoutubeClient.getVideos()
+        
+        YoutubeClient.getVideos { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let videos):
+                DispatchQueue.main.async { self.updateUI(videos: videos) }
+            case .failure(let error):
+                DispatchQueue.main.async { self.presentAlert(message: error.rawValue) }
+            }
+        }
+    }
+    
+    private func updateUI(videos: [Video]) {
+        self.videos = videos
+        tableView.reloadData()
+    }
+    
+    private func presentAlert(message: String) {
+        let alertController = UIAlertController(title: "Failure", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(action)
+        present(alertController, animated: true)
     }
     
     private func setupView() {
@@ -51,7 +72,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CELL_ID, for: indexPath) as! VideoCell
-        cell.backgroundColor = .red
+        let title = videos[indexPath.row].title
+        cell.textLabel?.text = title
         return cell
     }
 }
