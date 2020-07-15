@@ -34,7 +34,7 @@ class VideoCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    private func downloadThumbnailImage(video: Video){
+    private func downloadThumbnailImage(video: Video) {
         
         if let cachedData = CacheManager.getVideoCache(video.thumbnail) {
             thumbnailImageView.image = UIImage(data: cachedData)

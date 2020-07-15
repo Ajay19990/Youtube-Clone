@@ -20,7 +20,7 @@ class VideoListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         tableView.delegate = self
         setupDataSource()
         YoutubeClient.getVideos { [weak self] (result) in
@@ -71,7 +71,10 @@ extension VideoListController {
 extension VideoListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let video = dataSource.itemIdentifier(for: indexPath) else { return }
-        print(video.title)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "detailVC") as! DetailViewController
+        vc.video = video
+        self.present(vc, animated: true)
     }
 }
 
