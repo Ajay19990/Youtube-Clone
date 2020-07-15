@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D0A2E0B24BB6E55006AD550 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0A2E0A24BB6E55006AD550 /* VideoCell.swift */; };
+		2D3ACA3A24BECDF1007383E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D3ACA3924BECDF1007383E4 /* Main.storyboard */; };
+		2D3ACA5C24BED143007383E4 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3ACA5B24BED143007383E4 /* VideoCell.swift */; };
+		2D3ACA5E24BEDA74007383E4 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3ACA5D24BEDA74007383E4 /* CacheManager.swift */; };
 		2D515B7124B6E122005B13B8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D515B7024B6E122005B13B8 /* Constants.swift */; };
 		2D515B7324B6E450005B13B8 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D515B7224B6E450005B13B8 /* Video.swift */; };
 		2D515B7524B6E974005B13B8 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D515B7424B6E974005B13B8 /* Networking.swift */; };
@@ -22,7 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2D0A2E0A24BB6E55006AD550 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		2D3ACA3924BECDF1007383E4 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		2D3ACA5B24BED143007383E4 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		2D3ACA5D24BEDA74007383E4 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		2D515B7024B6E122005B13B8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../Constants.swift; sourceTree = "<group>"; };
 		2D515B7224B6E450005B13B8 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		2D515B7424B6E974005B13B8 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
@@ -70,7 +74,7 @@
 		2D0A2E0824BB6E1B006AD550 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2D0A2E0A24BB6E55006AD550 /* VideoCell.swift */,
+				2D3ACA5B24BED143007383E4 /* VideoCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -108,9 +112,10 @@
 				2D515B7824B6F6B6005B13B8 /* Response.swift */,
 				2D0A2E0724BB6E06006AD550 /* PlayListVideos */,
 				2D5CAA2324B063B200F2EB9E /* Assets.xcassets */,
-				2D5CAA2524B063B200F2EB9E /* LaunchScreen.storyboard */,
 				2D5CAA2824B063B200F2EB9E /* Info.plist */,
 				2DB18ABD24BB70E30076D960 /* Utilities */,
+				2D3ACA3924BECDF1007383E4 /* Main.storyboard */,
+				2D5CAA2524B063B200F2EB9E /* LaunchScreen.storyboard */,
 			);
 			path = YoutubeClone;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 				2D515B7024B6E122005B13B8 /* Constants.swift */,
 				2D515B7624B6EDB0005B13B8 /* ConstantsTemplate.swift */,
 				2DB18ABE24BB71050076D960 /* ErrorMessage.swift */,
+				2D3ACA5D24BEDA74007383E4 /* CacheManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -183,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D3ACA3A24BECDF1007383E4 /* Main.storyboard in Resources */,
 				2D5CAA2724B063B200F2EB9E /* LaunchScreen.storyboard in Resources */,
 				2D5CAA2424B063B200F2EB9E /* Assets.xcassets in Resources */,
 			);
@@ -198,9 +205,10 @@
 				2D515B7924B6F6B6005B13B8 /* Response.swift in Sources */,
 				2D515B7724B6EDB0005B13B8 /* ConstantsTemplate.swift in Sources */,
 				2DB18ABF24BB71050076D960 /* ErrorMessage.swift in Sources */,
-				2D0A2E0B24BB6E55006AD550 /* VideoCell.swift in Sources */,
 				2D5CAA1F24B063B000F2EB9E /* ViewController.swift in Sources */,
 				2D5CAA1B24B063B000F2EB9E /* AppDelegate.swift in Sources */,
+				2D3ACA5C24BED143007383E4 /* VideoCell.swift in Sources */,
+				2D3ACA5E24BEDA74007383E4 /* CacheManager.swift in Sources */,
 				2D5CAA1D24B063B000F2EB9E /* SceneDelegate.swift in Sources */,
 				2D515B7524B6E974005B13B8 /* Networking.swift in Sources */,
 				2D515B7124B6E122005B13B8 /* Constants.swift in Sources */,

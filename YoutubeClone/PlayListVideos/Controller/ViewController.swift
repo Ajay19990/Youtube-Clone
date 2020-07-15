@@ -8,20 +8,21 @@
 
 import UIKit
 
+fileprivate typealias VideoDataSource = UITableViewDiffableDataSource<ViewController.Section, Video>
+fileprivate typealias VideoSnapshot = NSDiffableDataSourceSnapshot<ViewController.Section, Video>
+
 class ViewController: UIViewController {
     
-    private let tableView = UITableView()
-    private var videos = [Video]()
+    @IBOutlet weak var tableView: UITableView!
     
-    override func loadView() {
-        super.loadView()
-        setupView()
-    }
+    private var videos = [Video]()
+    private var dataSource: VideoDataSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
+        tableView.delegate = self
+        setupDataSource()
         YoutubeClient.getVideos { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -33,9 +34,24 @@ class ViewController: UIViewController {
         }
     }
     
+    private func setupDataSource() {
+        dataSource = VideoDataSource(tableView: tableView) { (tableView, indexPath, video) -> UITableViewCell? in
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CELL_ID, for: indexPath) as! VideoCell
+            cell.video = video
+            return cell
+        }
+    }
+    
+    private func createSnapShot(from: [Video]) {
+        var snapshot = VideoSnapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(videos)
+        dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
     private func updateUI(videos: [Video]) {
         self.videos = videos
-        tableView.reloadData()
+        createSnapShot(from: videos)
     }
     
     private func presentAlert(message: String) {
@@ -44,37 +60,18 @@ class ViewController: UIViewController {
         alertController.addAction(action)
         present(alertController, animated: true)
     }
-    
-    private func setupView() {
-        setupTableView()
-    }
-    
-    private func setupTableView() {
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let top = tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        let leading = tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-        let trailing = tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        let bottom = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        NSLayoutConstraint.activate([top, leading, trailing, bottom])
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(VideoCell.self, forCellReuseIdentifier: Constants.CELL_ID)
+}
+
+extension ViewController {
+    fileprivate enum Section {
+        case main
     }
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return videos.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CELL_ID, for: indexPath) as! VideoCell
-        let title = videos[indexPath.row].title
-        cell.textLabel?.text = title
-        return cell
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let video = dataSource.itemIdentifier(for: indexPath) else { return }
+        print(video.title)
     }
 }
 
